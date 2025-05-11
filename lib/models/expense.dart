@@ -7,7 +7,8 @@ enum Category {
   leisure,
   work,
   services,
-  streaming
+  streaming,
+  clothes
 }
 
 class Expense {
