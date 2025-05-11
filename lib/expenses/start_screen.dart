@@ -15,7 +15,8 @@ class _StartScreenState extends State<StartScreen> {
     return Scaffold(
       body: Column(
         children: [
-          Text('Hey there')
+          Text('Here goes a chart'),
+          Text('Here goes a list of expenses')
         ],
       ),
     );
