@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:spendox/models/expense.dart';
-import 'package:spendox/expenses/expenses_list.dart';
+import 'package:spendox/widgets/expenses/expenses_list/expenses_list.dart';
 
 class StartScreen extends StatefulWidget{
   const StartScreen({super.key});

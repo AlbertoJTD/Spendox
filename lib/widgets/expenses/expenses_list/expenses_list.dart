@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:spendox/models/expense.dart';
+import 'package:spendox/widgets/expenses/expenses_list/expense_item.dart';
 
 class ExpensesList extends StatelessWidget {
   const ExpensesList({super.key, required this.expenses});
@@ -12,7 +13,9 @@ class ExpensesList extends StatelessWidget {
     return ListView.builder(
       itemCount: expenses.length,
       itemBuilder: (contextObject, index) {
-        return Text(expenses[index].title);
+        return ExpenseItem(
+          expense: expenses[index],
+        );
       },
     );
   }
