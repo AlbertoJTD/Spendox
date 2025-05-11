@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:spendox/models/expense.dart';
+import 'package:spendox/expenses/expenses_list.dart';
 
 class StartScreen extends StatefulWidget{
   const StartScreen({super.key});
@@ -23,8 +24,15 @@ class _StartScreenState extends State<StartScreen> {
     return Scaffold(
       body: Column(
         children: [
-          Text('Here goes a chart'),
-          Text('Here goes a list of expenses')
+          const Text(
+            'Here goes a chart'
+          ),
+
+          Expanded(
+            child: ExpensesList(
+              expenses: _registeredExpenses,
+            ),
+          )
         ],
       ),
     );
