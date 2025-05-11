@@ -22,6 +22,15 @@ class _StartScreenState extends State<StartScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Spendox: Expense tracker'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.add)
+          ),
+        ]
+      ),
       body: Column(
         children: [
           const Text(
