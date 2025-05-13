@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:spendox/models/expense.dart';
 import 'package:spendox/widgets/expenses/expenses_list/expenses_list.dart';
+import 'package:spendox/widgets/expenses/new_expense.dart';
 
 class StartScreen extends StatefulWidget{
   const StartScreen({super.key});
@@ -19,6 +20,12 @@ class _StartScreenState extends State<StartScreen> {
     Expense(title: 'Gym Membership', amount: 29.99, date: DateTime.now(), category: Category.leisure),
   ];
 
+  void _openAddExpenseOverlay() {
+    showModalBottomSheet(context: context, builder: (contextObject) {
+      return NewExpense();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +33,7 @@ class _StartScreenState extends State<StartScreen> {
         title: Text('Spendox: Expense tracker'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: _openAddExpenseOverlay,
             icon: Icon(Icons.add)
           ),
         ]
