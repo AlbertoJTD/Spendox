@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:spendox/models/expense.dart';
+
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key});
 
@@ -13,17 +15,22 @@ class _NewExpenseState extends State<NewExpense> {
   // var _enteredTitle = '';
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+  DateTime? _selectedDate;
 
-  void _presentDatePicker() {
+  void _presentDatePicker() async {
     final initialDate = DateTime.now();
     final firstDate = DateTime(initialDate.year - 1, initialDate.month, initialDate.day);
 
-    showDatePicker(
+    final pickedDate = await showDatePicker(
       context: context,
       initialDate: initialDate,
       firstDate: firstDate,
       lastDate: initialDate,
     );
+
+    setState(() {
+      _selectedDate = pickedDate;
+    });
   }
 
   // void _saveTitleInput(String inputValue) {
@@ -72,7 +79,10 @@ class _NewExpenseState extends State<NewExpense> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text('Selected date'),
+                    Text(_selectedDate == null
+                      ? 'No date selected'
+                      : dateFormatter.format(_selectedDate!), // '!' This won't be null
+                    ),
                     IconButton(
                       onPressed: _presentDatePicker,
                       icon: Icon(Icons.calendar_month)
