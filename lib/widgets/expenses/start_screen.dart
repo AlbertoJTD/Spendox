@@ -22,6 +22,7 @@ class _StartScreenState extends State<StartScreen> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (contextObject) {
         return NewExpense(
