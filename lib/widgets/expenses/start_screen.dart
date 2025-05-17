@@ -21,9 +21,12 @@ class _StartScreenState extends State<StartScreen> {
   ];
 
   void _openAddExpenseOverlay() {
-    showModalBottomSheet(context: context, builder: (contextObject) {
-      return NewExpense();
-    });
+    showModalBottomSheet(
+      context: context,
+      builder: (contextObject) {
+        return NewExpense();
+      }
+    );
   }
 
   @override
