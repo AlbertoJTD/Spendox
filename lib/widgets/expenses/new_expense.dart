@@ -53,7 +53,7 @@ class _NewExpenseState extends State<NewExpense> {
             children: [
               TextButton(
                 onPressed: () {
-                  print('Cancelling expense');
+                  Navigator.pop(context);
                 },
                 child: const Text('Cancel')
               ),
