@@ -46,6 +46,17 @@ class _StartScreenState extends State<StartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = const Center(
+      child: Text('No expenses found. Start adding some!'),
+    );
+
+    if (_registeredExpenses.isNotEmpty) {
+      mainContent = ExpensesList(
+        expenses: _registeredExpenses,
+        onRemoveExpense: __removeExpense,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Spendox: Expense tracker'),
@@ -63,10 +74,7 @@ class _StartScreenState extends State<StartScreen> {
           ),
 
           Expanded(
-            child: ExpensesList(
-              expenses: _registeredExpenses,
-              onRemoveExpense: __removeExpense,
-            ),
+            child: mainContent
           )
         ],
       ),
