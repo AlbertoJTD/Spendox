@@ -24,9 +24,17 @@ class _StartScreenState extends State<StartScreen> {
     showModalBottomSheet(
       context: context,
       builder: (contextObject) {
-        return NewExpense();
+        return NewExpense(
+          onAddExpense: _addExpense,
+        );
       }
     );
+  }
+
+  void _addExpense(Expense expense) {
+    setState(() {
+      _registeredExpenses.add(expense);
+    });
   }
 
   @override

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:spendox/models/expense.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({super.key});
+  NewExpense({super.key, required this.onAddExpense});
+
+  final void Function(Expense expense) onAddExpense;
 
   @override
   State<NewExpense> createState() {
@@ -38,7 +40,7 @@ class _NewExpenseState extends State<NewExpense> {
     final enteredAmount = double.tryParse(_amountController.text);
     final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
 
-    if (_titleController.text.trim().isEmpty || amountIsInvalid || _selectedDate == null) {
+    if (_titleController.text.trim().isEmpty || amountIsInvalid || _selectedDate == null || _selectedCategory == null) {
       showDialog(
         context: context,
         builder: (contextObject) => AlertDialog(
@@ -57,6 +59,16 @@ class _NewExpenseState extends State<NewExpense> {
 
       return;
     }
+
+    Expense newExpense = Expense(
+      title: _titleController.text,
+      amount: enteredAmount,
+      date: _selectedDate!,
+      category: _selectedCategory
+    );
+
+    widget.onAddExpense(newExpense);
+    Navigator.pop(context);
   }
 
   // void _saveTitleInput(String inputValue) {
