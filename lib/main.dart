@@ -9,9 +9,32 @@ var kColorScheme = ColorScheme.fromSeed(
   errorContainer: const Color.fromARGB(255, 219, 113, 113),
 );
 
+var kDarkColorScheme = ColorScheme.fromSeed(
+  seedColor: const Color.fromARGB(255, 5, 99, 125),
+  brightness: Brightness.dark,
+  primary: const Color.fromARGB(255, 0, 0, 0),
+  secondary: const Color.fromARGB(255, 10, 37, 53),
+  errorContainer: const Color.fromARGB(255, 219, 113, 113),
+);
+
 void main() {
   runApp(
     MaterialApp(
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: kDarkColorScheme,
+        appBarTheme: const AppBarTheme().copyWith(
+          backgroundColor: kDarkColorScheme.inversePrimary,
+          foregroundColor: kDarkColorScheme.inverseSurface,
+        ),
+
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kDarkColorScheme.primaryContainer,
+            foregroundColor: kDarkColorScheme.onPrimaryContainer,
+          )
+        ),
+
+      ),
       theme: ThemeData().copyWith(
         colorScheme: kColorScheme,
 
@@ -49,6 +72,7 @@ void main() {
         )
       ),
       home: StartScreen(),
+      // themeMode: ThemeMode.system,
     )
   );
 }
