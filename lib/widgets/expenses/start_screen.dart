@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:spendox/models/expense.dart';
+import 'package:spendox/widgets/chart/chart.dart';
 import 'package:spendox/widgets/expenses/expenses_list/expenses_list.dart';
 import 'package:spendox/widgets/expenses/new_expense.dart';
 
@@ -86,8 +87,8 @@ class _StartScreenState extends State<StartScreen> {
       ),
       body: Column(
         children: [
-          const Text(
-            'Here goes a chart'
+          Chart(
+            expenses: _registeredExpenses
           ),
 
           Expanded(
