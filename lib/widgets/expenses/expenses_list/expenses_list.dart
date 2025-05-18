@@ -15,6 +15,15 @@ class ExpensesList extends StatelessWidget {
       itemCount: expenses.length,
       itemBuilder: (contextObject, index) {
         return Dismissible(
+          background: Container(
+            color: Theme.of(context).colorScheme.errorContainer,
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.only(right: 20),
+            child: const Icon(
+              Icons.delete,
+              color: Colors.white,
+            ),
+          ),
           key: ValueKey(
             expenses[index],
           ),

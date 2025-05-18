@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:spendox/widgets/expenses/start_screen.dart';
 
 var kColorScheme = ColorScheme.fromSeed(
-  seedColor: const Color.fromARGB(255, 0, 0, 0),
+  seedColor: const Color.fromARGB(255, 51, 49, 129),
   primary: const Color.fromARGB(255, 0, 0, 0),
   secondary: const Color.fromARGB(255, 255, 255, 255),
+  errorContainer: const Color.fromARGB(255, 219, 113, 113),
 );
 
 void main() {
@@ -37,6 +38,11 @@ void main() {
         textTheme: ThemeData().textTheme.copyWith(
           titleLarge: TextStyle(
             fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: kColorScheme.onSecondaryContainer,
+          ),
+          titleMedium: TextStyle(
+            fontSize: 15,
             fontWeight: FontWeight.bold,
             color: kColorScheme.onSecondaryContainer,
           ),
