@@ -23,6 +23,7 @@ class _StartScreenState extends State<StartScreen> {
 
   void _openAddExpenseOverlay() {
     showModalBottomSheet(
+      useSafeArea: true,
       isScrollControlled: true,
       context: context,
       builder: (contextObject) {
