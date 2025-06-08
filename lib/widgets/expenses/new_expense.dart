@@ -5,6 +5,11 @@ import 'package:flutter/material.dart';
 
 import 'package:spendox/models/expense.dart';
 
+import 'package:spendox/widgets/expenses/form/title_input.dart';
+import 'package:spendox/widgets/expenses/form/amount_input.dart';
+import 'package:spendox/widgets/expenses/form/date_picker.dart';
+import 'package:spendox/widgets/expenses/form/categories_dropdown.dart';
+
 class NewExpense extends StatefulWidget {
   NewExpense({super.key, required this.onAddExpense});
 
@@ -22,22 +27,6 @@ class _NewExpenseState extends State<NewExpense> {
   final _amountController = TextEditingController();
   DateTime? _selectedDate;
   Category _selectedCategory = Category.food;
-
-  void _presentDatePicker() async {
-    final initialDate = DateTime.now();
-    final firstDate = DateTime(initialDate.year - 1, initialDate.month, initialDate.day);
-
-    final pickedDate = await showDatePicker(
-      context: context,
-      initialDate: initialDate,
-      firstDate: firstDate,
-      lastDate: initialDate,
-    );
-
-    setState(() {
-      _selectedDate = pickedDate;
-    });
-  }
 
   void _showDialog() {
     if (Platform.isIOS) {
@@ -129,57 +118,33 @@ class _NewExpenseState extends State<NewExpense> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: TextField(
-                            controller: _titleController,
-                            maxLength: 50,
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              label: Text('Title'),
-                            ),
-                          ),
+                          child: TitleInput(
+                            titleController: _titleController
+                          )
                         ),
             
                         const SizedBox(width: 16),
             
                         Expanded(
-                          child: TextField(
-                            controller: _amountController,
-                            maxLength: 10,
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              label: Text('Amount'),
-                              prefixText: '\$',
-                            ),
-                          ),
+                          child: AmountInput(
+                            amountController: _amountController
+                          )
                         )
                       ],
                     )
                   else
-                    TextField(
-                      controller: _titleController,
-                      maxLength: 50,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        label: Text('Title'),
-                      ),
+                    TitleInput(
+                      titleController: _titleController
                     ),
             
                   if (width >= 600)
                     Row(
                       children: [
-                        DropdownButton(
-                          value: _selectedCategory,
-                          items: Category.values.map((category) =>
-                            DropdownMenuItem(
-                              value: category,
-                              child: Text(category.name.toUpperCase()),
-                            )
-                          ).toList(),
-                          onChanged: (value) {
-                            if (value == null) return;
-              
+                        CategoriesDropdown(
+                          selectedCategory: _selectedCategory,
+                          onCategoryChanged: (category) {
                             setState(() {
-                              _selectedCategory = value;
+                              _selectedCategory = category;
                             });
                           }
                         ),
@@ -187,20 +152,14 @@ class _NewExpenseState extends State<NewExpense> {
                         const SizedBox(width: 16),
 
                         Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(_selectedDate == null
-                                ? 'No date selected'
-                                : dateFormatter.format(_selectedDate!), // '!' This won't be null
-                              ),
-                              IconButton(
-                                onPressed: _presentDatePicker,
-                                icon: Icon(Icons.calendar_month)
-                              )
-                            ],
-                          ),
+                          child: DatePicker(
+                            selectedDate: _selectedDate,
+                            onDateChanged: (date) {
+                              setState(() {
+                                _selectedDate = date;
+                              });
+                            }
+                          )
                         ),
                       ],
                     )
@@ -208,34 +167,22 @@ class _NewExpenseState extends State<NewExpense> {
                     Row(
                       children: [
                         Expanded(
-                          child: TextField(
-                            controller: _amountController,
-                            maxLength: 10,
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              label: Text('Amount'),
-                              prefixText: '\$',
-                            ),
-                          ),
+                          child: AmountInput(
+                            amountController: _amountController
+                          )
                         ),
               
                         const SizedBox(width: 16),
               
                         Expanded(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(_selectedDate == null
-                                ? 'No date selected'
-                                : dateFormatter.format(_selectedDate!), // '!' This won't be null
-                              ),
-                              IconButton(
-                                onPressed: _presentDatePicker,
-                                icon: Icon(Icons.calendar_month)
-                              )
-                            ],
-                          ),
+                          child: DatePicker(
+                            selectedDate: _selectedDate,
+                            onDateChanged: (date) {
+                              setState(() {
+                                _selectedDate = date;
+                              });
+                            }
+                          )
                         )
                       ],
                     ),
@@ -243,22 +190,14 @@ class _NewExpenseState extends State<NewExpense> {
                   if (width < 600)
                     Row(
                       children: [
-                        DropdownButton(
-                          value: _selectedCategory,
-                          items: Category.values.map((category) =>
-                            DropdownMenuItem(
-                              value: category,
-                              child: Text(category.name.toUpperCase()),
-                            )
-                          ).toList(),
-                          onChanged: (value) {
-                            if (value == null) return;
-              
+                        CategoriesDropdown(
+                          selectedCategory: _selectedCategory,
+                          onCategoryChanged: (category) {
                             setState(() {
-                              _selectedCategory = value;
+                              _selectedCategory = category;
                             });
                           }
-                        ),
+                        )
                       ],
                     ),
             
