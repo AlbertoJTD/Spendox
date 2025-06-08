@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:spendox/models/expense.dart';
 
-class DatePicker extends StatefulWidget {
-  DatePicker({
+class DatePicker extends StatelessWidget {
+  const DatePicker({
     super.key,
     required this.selectedDate,
     required this.onDateChanged
@@ -12,14 +12,7 @@ class DatePicker extends StatefulWidget {
   final DateTime? selectedDate;
   final void Function(DateTime date) onDateChanged;
 
-  @override
-  State<StatefulWidget> createState() {
-    return _DatePickerState();
-  }
-}
-
-class _DatePickerState extends State<DatePicker> {
-  void _presentDatePicker() async {
+  Future<void> _presentDatePicker(BuildContext context) async {
     final initialDate = DateTime.now();
     final firstDate = DateTime(initialDate.year - 1, initialDate.month, initialDate.day);
 
@@ -31,7 +24,7 @@ class _DatePickerState extends State<DatePicker> {
     );
 
     if (pickedDate != null) {
-      widget.onDateChanged(pickedDate);
+      onDateChanged(pickedDate);
     }
   }
 
@@ -41,13 +34,13 @@ class _DatePickerState extends State<DatePicker> {
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(widget.selectedDate == null
+        Text(selectedDate == null
           ? 'No date selected'
-          : dateFormatter.format(widget.selectedDate!),
+          : dateFormatter.format(selectedDate!),
         ),
         IconButton(
-          onPressed: _presentDatePicker,
-          icon: Icon(Icons.calendar_month)
+          onPressed: () => _presentDatePicker(context),
+          icon: const Icon(Icons.calendar_month)
         )
       ],
     );
