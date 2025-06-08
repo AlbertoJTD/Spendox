@@ -64,6 +64,8 @@ class _StartScreenState extends State<StartScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+
     Widget mainContent = const Center(
       child: Text('No expenses found. Start adding some!'),
     );
@@ -85,7 +87,7 @@ class _StartScreenState extends State<StartScreen> {
           ),
         ]
       ),
-      body: Column(
+      body: (width < 600 ) ? Column(
         children: [
           Chart(
             expenses: _registeredExpenses
@@ -95,7 +97,19 @@ class _StartScreenState extends State<StartScreen> {
             child: mainContent
           )
         ],
-      ),
+      ) :  Row(
+        children: [
+          Expanded(
+            child: Chart(
+              expenses: _registeredExpenses
+            ),
+          ),
+
+          Expanded(
+            child: mainContent
+          )
+        ],
+      ) ,
     );
   }
 }
